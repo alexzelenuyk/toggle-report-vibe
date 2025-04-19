@@ -116,7 +116,13 @@ export async function generateReport(params: ReportParams): Promise<TimeEntryRep
       const totalHours = hourDiff - pauseDurationRelative;
       
       // Group descriptions by day (unique descriptions only)
-      const descriptions = [...new Set(entries.map(entry => entry['Description']))].filter(Boolean);
+      const descriptionSet = new Set<string>();
+      entries.forEach(entry => {
+        if (entry['Description']) {
+          descriptionSet.add(entry['Description']);
+        }
+      });
+      const descriptions = Array.from(descriptionSet);
       
       // Format job ID (use provided job ID or extract from descriptions)
       const jobId = params.jobId || extractJobId(descriptions.join(' ')) || '';
