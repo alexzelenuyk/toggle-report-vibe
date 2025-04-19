@@ -27,6 +27,14 @@ const nextConfig = {
       },
     ];
   },
+  // Silence specific deprecation warnings
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Load our helper to silence the specific deprecation warning
+      require('./src/lib/utils/silence-deprecation');
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig;
