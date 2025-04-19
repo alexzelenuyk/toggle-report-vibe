@@ -27,6 +27,35 @@ Alternatively, you can deploy it manually:
 3. Create a new project and import your forked repository
 4. Deploy!
 
+### CI/CD with GitHub Actions
+
+This project includes a GitHub Actions workflow for continuous integration and deployment:
+
+1. On push to the main branch or pull requests targeting main, the workflow:
+   - Runs ESLint checks
+   - Verifies TypeScript types
+   - Executes tests
+   - Builds the application
+
+2. When changes are pushed to the main branch, the workflow also:
+   - Deploys the application to Vercel production environment
+
+To set up the Vercel deployment in GitHub Actions, add the following secrets to your repository:
+
+- `VERCEL_TOKEN`: Your Vercel API token (can be created in Vercel account settings)
+- `VERCEL_ORG_ID`: Your Vercel organization ID (found in Vercel project settings)
+- `VERCEL_PROJECT_ID`: Your Vercel project ID (found in Vercel project settings)
+
+You can use the included helper script to obtain the necessary Vercel configuration values:
+
+```bash
+# First, link your project to Vercel
+npx vercel link
+
+# Then run the helper script to get the configuration values
+npm run vercel-config
+```
+
 ### Local Development
 
 1. Clone the repository:

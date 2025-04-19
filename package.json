@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "vercel-config": "node scripts/get-vercel-config.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
