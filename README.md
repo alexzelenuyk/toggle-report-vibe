@@ -2,6 +2,9 @@
 
 A Next.js application for generating customized reports from Toggl time entries.
 
+[![CI/CD Pipeline](https://github.com/alexzelenuyk/toggle-report-vibe/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/alexzelenuyk/toggle-report-vibe/actions/workflows/ci-cd.yml)
+[![Vercel Deployment](https://therealsujitk-vercel-badge.vercel.app/?app=toggle-report-vibe)](https://toggle-report-vibe.vercel.app)
+
 🚀 **Live Demo:** [https://toggle-report-vibe.vercel.app](https://toggle-report-vibe.vercel.app)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falexzelenuyk%2Ftoggle-report-vibe)
