@@ -1,12 +1,13 @@
-export interface TogglTimeEntry {
-  id: number;
-  description: string;
-  start: string;
-  end: string;
-  dur: number;
-  tags?: string[];
-  project_id?: number;
-  task_id?: number;
+export interface RawTogglTimeEntry {
+  'Start date': string;
+  'Start time': string;
+  'End time': string;
+  'Duration': string;
+  'Description': string;
+  'Project'?: string;
+  'Task'?: string;
+  'Client'?: string;
+  'Tags'?: string;
 }
 
 export interface TimeEntryReport {
