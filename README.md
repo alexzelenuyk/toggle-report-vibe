@@ -130,6 +130,16 @@ The Excel export uses the following column names:
 - Times are rounded to minutes (no seconds displayed)
 - The date picker starts weeks on Monday
 
+## Dependency Management
+
+This project uses [Renovate](https://github.com/renovatebot/renovate) for automated dependency updates:
+
+- Renovate will create PRs for new dependency versions
+- Minor and patch updates will be automatically merged if tests pass
+- Major updates require manual review
+- The dependency dashboard (visible in Issues) shows the update status
+- Updates are scheduled to run every weekend to minimize disruption
+
 ## License
 
 MIT
