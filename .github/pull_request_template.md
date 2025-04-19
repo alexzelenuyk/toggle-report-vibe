@@ -25,4 +25,6 @@
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
+- [ ] I have added unit tests for new functionality
+- [ ] I have added component tests for React components (if applicable)
 - [ ] New and existing tests pass locally with my changes

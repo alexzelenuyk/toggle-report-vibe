@@ -120,8 +120,8 @@ describe('togglApi', () => {
       
       (axios.post as jest.Mock).mockRejectedValue(errorResponse);
       
-      // Call the function and check it throws the expected error
-      await expect(generateReport(mockParams)).rejects.toThrow('Toggl API error: 401 Unauthorized');
+      // Call the function and check it throws a user-friendly error
+      await expect(generateReport(mockParams)).rejects.toThrow(/Authentication failed/);
       
       // Check error was logged
       expect(console.error).toHaveBeenCalled();
@@ -131,8 +131,8 @@ describe('togglApi', () => {
       // Mock empty data
       (Papa.parse as jest.Mock).mockReturnValue({ data: [] });
       
-      // Call the function and check it throws the expected error
-      await expect(generateReport(mockParams)).rejects.toThrow('No time entries found for the specified period.');
+      // Call the function and check it throws a user-friendly error
+      await expect(generateReport(mockParams)).rejects.toThrow(/No time entries were found/);
     });
 
     it('should calculate pause duration correctly', async () => {

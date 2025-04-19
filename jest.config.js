@@ -26,6 +26,10 @@ const customJestConfig = {
     '!src/**/_*.{ts,tsx}',
     '!src/**/*.stories.{ts,tsx}',
   ],
+  // Transform ESM modules
+  transformIgnorePatterns: [
+    'node_modules/(?!(uuid|exceljs)/)'
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

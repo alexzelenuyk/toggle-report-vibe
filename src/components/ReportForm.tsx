@@ -134,7 +134,20 @@ export default function ReportForm() {
       
       {error && (
         <Box mt={3}>
-          <Alert severity="error">{error}</Alert>
+          <Alert 
+            severity="error" 
+            variant="filled"
+            sx={{ 
+              '& .MuiAlert-message': { 
+                whiteSpace: 'pre-line' 
+              } 
+            }}
+          >
+            <Typography variant="h6" component="div" sx={{ mb: 1 }}>
+              Report Generation Failed
+            </Typography>
+            {error}
+          </Alert>
         </Box>
       )}
       
