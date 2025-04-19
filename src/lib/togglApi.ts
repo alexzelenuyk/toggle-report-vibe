@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Papa from 'papaparse';
 import { ReportParams, TimeEntryReport, RawTogglTimeEntry } from './types';
+import { getFriendlyErrorMessage } from './utils/errorMessages';
 
 // Main report generation function
 export async function generateReport(params: ReportParams): Promise<TimeEntryReport[]> {
@@ -21,25 +22,20 @@ export async function generateReport(params: ReportParams): Promise<TimeEntryRep
     return reportEntries.sort((a, b) => a.startDate.localeCompare(b.startDate));
     
   } catch (error) {
+    // Safely log error without sensitive data
     if (axios.isAxiosError(error) && error.response) {
-      // Safely log error without sensitive data
       console.error('Error generating report:', { 
         status: error.response.status,
         statusText: error.response.statusText,
         message: error.message
       });
-      
-      throw new Error(`Toggl API error: ${error.response.status} ${error.response.statusText}`);
+    } else {
+      console.error('Error generating report:', error instanceof Error ? error.message : 'Unknown error');
     }
     
-    // For empty data or other errors
-    if (error instanceof Error && error.message === 'No time entries found for the specified period.') {
-      throw error;
-    }
-    
-    // Generic error
-    console.error('Error generating report:', 'Unknown error');
-    throw new Error('Failed to generate report. Please check your credentials and try again.');
+    // Generate a user-friendly error message with some humor
+    const friendlyMessage = getFriendlyErrorMessage(error);
+    throw new Error(friendlyMessage);
   }
 }
 

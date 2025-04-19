@@ -140,6 +140,15 @@ This project uses [Renovate](https://github.com/renovatebot/renovate) for automa
 - The dependency dashboard (visible in Issues) shows the update status
 - Updates are scheduled to run every weekend to minimize disruption
 
+## Contributing
+
+We welcome contributions to Toggle Report Vibe! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project, including:
+
+- Setting up your development environment
+- Coding standards and style guidelines
+- Pull request process
+- Testing requirements
+
 ## License
 
 MIT
