@@ -74,7 +74,7 @@ describe('ReportForm', () => {
     });
   });
 
-  test('displays error message on API failure', async () => {
+  test('displays error message and grumpy cat image on API failure', async () => {
     (generateReport as jest.Mock).mockRejectedValue(new Error('API Error'));
     
     render(<ReportForm />);
@@ -91,10 +91,12 @@ describe('ReportForm', () => {
     await waitFor(() => {
       expect(screen.getByText('API Error')).toBeInTheDocument();
       expect(screen.getByText('Report Generation Failed')).toBeInTheDocument();
+      expect(screen.getByTestId('grumpy-cat-image')).toBeInTheDocument();
+      expect(screen.getByAltText(/grumpy cat is not impressed/i)).toBeInTheDocument();
     });
   });
   
-  test('displays friendly error message with formatting', async () => {
+  test('displays friendly error message with formatting and grumpy cat', async () => {
     const friendlyError = new Error('🔍 This is a friendly error message.\nIt has multiple lines and an emoji!');
     (generateReport as jest.Mock).mockRejectedValue(friendlyError);
     
@@ -117,6 +119,9 @@ describe('ReportForm', () => {
       // The parent Alert should be of the error severity
       const alertElement = errorMessage.closest('.MuiAlert-root');
       expect(alertElement).toHaveClass('MuiAlert-filledError');
+      
+      // Check for grumpy cat image
+      expect(screen.getByTestId('grumpy-cat-image')).toBeInTheDocument();
     });
   });
 });

@@ -148,6 +148,27 @@ export default function ReportForm() {
             </Typography>
             {error}
           </Alert>
+          <Box 
+            mt={2} 
+            sx={{ 
+              display: 'flex', 
+              justifyContent: 'center',
+              overflow: 'hidden',
+              borderRadius: 2
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/images/grumpy-cat.png" 
+              alt="Grumpy cat is not impressed with this error" 
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: '200px',
+                objectFit: 'contain'
+              }}
+              data-testid="grumpy-cat-image"
+            />
+          </Box>
         </Box>
       )}
       
