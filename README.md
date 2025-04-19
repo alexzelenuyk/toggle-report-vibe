@@ -2,7 +2,7 @@
 
 A Next.js application for generating customized reports from Toggl time entries.
 
-🚀 **Live Demo:** [https://toggle-report-vibe-ecmfejrub-oleks-projects-e9c70669.vercel.app](https://toggle-report-vibe-ecmfejrub-oleks-projects-e9c70669.vercel.app)
+🚀 **Live Demo:** [https://toggle-report-vibe.vercel.app](https://toggle-report-vibe.vercel.app)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falexzelenuyk%2Ftoggle-report-vibe)
 
