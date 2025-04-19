@@ -17,7 +17,7 @@ import {
   Stack
 } from '@mui/material';
 import { TimeEntryReport } from '@/lib/types';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 
 interface ReportTableProps {
@@ -60,28 +60,57 @@ export default function ReportTable({ data }: ReportTableProps) {
     document.body.removeChild(link);
   };
   
-  const downloadExcel = () => {
-    // Create worksheet data with the requested column names
-    const excelData = data.map(row => ({
-      'Date': row.startDate,
-      'StartTime': row.startTime,
-      'EndTime': row.endTime,
-      'JobCode': row.jobId || '',
-      'Break': row.pauseDuration,
-      'TotalHours': row.totalHours,
-      'Description': row.description
-    }));
+  const downloadExcel = async () => {
+    // Create a new workbook
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Report');
     
-    // Create a worksheet
-    const worksheet = XLSX.utils.json_to_sheet(excelData);
+    // Add column headers
+    worksheet.columns = [
+      { header: 'Date', key: 'date' },
+      { header: 'StartTime', key: 'startTime' },
+      { header: 'EndTime', key: 'endTime' },
+      { header: 'JobCode', key: 'jobCode' },
+      { header: 'Break', key: 'break' },
+      { header: 'TotalHours', key: 'totalHours' },
+      { header: 'Description', key: 'description' }
+    ];
     
-    // Create a workbook
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
+    // Add rows
+    data.forEach(row => {
+      worksheet.addRow({
+        date: row.startDate,
+        startTime: row.startTime,
+        endTime: row.endTime,
+        jobCode: row.jobId || '',
+        break: row.pauseDuration,
+        totalHours: row.totalHours,
+        description: row.description
+      });
+    });
+    
+    // Apply styles to header row
+    worksheet.getRow(1).font = { bold: true };
+    
+    // Auto-fit columns
+    worksheet.columns.forEach(column => {
+      if (column) {
+        let maxLength = 0;
+        if (column.eachCell) {
+          column.eachCell({ includeEmpty: true }, cell => {
+            const columnLength = cell.value ? cell.value.toString().length : 10;
+            if (columnLength > maxLength) {
+              maxLength = columnLength;
+            }
+          });
+          column.width = maxLength < 10 ? 10 : maxLength + 2;
+        }
+      }
+    });
     
     // Generate Excel file
-    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     
     // Save file
     saveAs(blob, `toggl-report-${new Date().toISOString().split('T')[0]}.xlsx`);
@@ -115,7 +144,7 @@ export default function ReportTable({ data }: ReportTableProps) {
           <Button 
             variant="contained" 
             color="primary" 
-            onClick={downloadExcel}
+            onClick={() => downloadExcel().catch(err => console.error('Excel export error:', err))}
           >
             Export to Excel
           </Button>
