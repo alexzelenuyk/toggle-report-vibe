@@ -45,21 +45,23 @@ This project includes a GitHub Actions workflow for continuous integration and d
 
 To set up the Vercel deployment in GitHub Actions:
 
-1. You need to add your Vercel API token as a secret in your GitHub repository:
-   - `VERCEL_TOKEN`: Your Vercel API token (can be created in Vercel account settings)
-
-2. Make sure your project is linked to Vercel:
+1. Link your project to Vercel on your local machine:
    ```bash
    # Link your project to Vercel (run this once in your project directory)
    npx vercel
    ```
 
-3. The GitHub Actions workflow will use the Vercel CLI to deploy your project.
+2. Run the helper script to get the necessary configuration values:
+   ```bash
+   npm run vercel-config
+   ```
 
-You can run the included helper script for additional guidance:
-```bash
-npm run vercel-config
-```
+3. Add these secrets to your GitHub repository:
+   - `VERCEL_TOKEN`: Your Vercel API token (create at https://vercel.com/account/tokens)
+   - `VERCEL_ORG_ID`: Your Vercel organization ID (shown by the helper script)
+   - `VERCEL_PROJECT_ID`: Your Vercel project ID (shown by the helper script)
+
+4. GitHub Actions will now automatically deploy your project to Vercel when you push to main.
 
 ### Local Development
 
