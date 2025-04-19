@@ -17,6 +17,8 @@ import {
   Stack
 } from '@mui/material';
 import { TimeEntryReport } from '@/lib/types';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 interface ReportTableProps {
   data: TimeEntryReport[];
@@ -58,6 +60,33 @@ export default function ReportTable({ data }: ReportTableProps) {
     document.body.removeChild(link);
   };
   
+  const downloadExcel = () => {
+    // Create worksheet data with the requested column names
+    const excelData = data.map(row => ({
+      'Date': row.startDate,
+      'StartTime': row.startTime,
+      'EndTime': row.endTime,
+      'JobCode': row.jobId || '',
+      'Break': row.pauseDuration,
+      'TotalHours': row.totalHours,
+      'Description': row.description
+    }));
+    
+    // Create a worksheet
+    const worksheet = XLSX.utils.json_to_sheet(excelData);
+    
+    // Create a workbook
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
+    
+    // Generate Excel file
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+    // Save file
+    saveAs(blob, `toggl-report-${new Date().toISOString().split('T')[0]}.xlsx`);
+  };
+  
   const copyToClipboard = async () => {
     try {
       const csvContent = generateCsvContent();
@@ -82,6 +111,13 @@ export default function ReportTable({ data }: ReportTableProps) {
           </Button>
           <Button variant="outlined" onClick={downloadCsv}>
             Download CSV
+          </Button>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={downloadExcel}
+          >
+            Export to Excel
           </Button>
         </Stack>
       </Box>

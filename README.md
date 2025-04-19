@@ -11,7 +11,7 @@ A Next.js application for generating customized reports from Toggl time entries.
 - Form for inputting Toggl API credentials and parameters
 - Integration with Toggl API to fetch time entries
 - Report generation with daily summaries
-- Downloadable CSV export
+- Export options: Excel, CSV, or clipboard copy
 - Material UI components for a clean, responsive UI
 
 ## Deployment
@@ -59,11 +59,14 @@ Alternatively, you can deploy it manually:
 
 3. View the summarized data in the table
 
-4. Export your data either by:
-   - Clicking "Copy CSV to Clipboard" to copy the data directly to your clipboard
-   - Clicking "Download CSV" to download the file to your computer
+4. Export your data using one of these options:
+   - "Export to Excel" - download an Excel file with formatted columns
+   - "Download CSV" - download a CSV file
+   - "Copy CSV to Clipboard" - copy data directly to your clipboard
 
 ## Report Format
+
+### CSV Format
 
 The generated CSV file follows this format:
 
@@ -71,6 +74,14 @@ The generated CSV file follows this format:
 start_date,start_time,end_time,job_id,pause_duration,total_hours,description
 2025-03-24,08:53,18:15,293378-220,0.75,8.50,API-2846: kafka; Client meeting; Documentation
 ```
+
+### Excel Format
+
+The Excel export uses the following column names:
+
+| Date | StartTime | EndTime | JobCode | Break | TotalHours | Description |
+|------|-----------|---------|---------|-------|------------|-------------|
+| 2025-03-24 | 08:53 | 18:15 | 293378-220 | 0.75 | 8.50 | API-2846: kafka; Client meeting; Documentation |
 
 - Entries are grouped by day
 - Descriptions for the same day are combined with semicolon separators
