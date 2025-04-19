@@ -43,19 +43,21 @@ This project includes a GitHub Actions workflow for continuous integration and d
 2. When changes are pushed to the main branch, the workflow also:
    - Deploys the application to Vercel production environment
 
-To set up the Vercel deployment in GitHub Actions, add the following secrets to your repository:
+To set up the Vercel deployment in GitHub Actions:
 
-- `VERCEL_TOKEN`: Your Vercel API token (can be created in Vercel account settings)
-- `VERCEL_ORG_ID`: Your Vercel organization ID (found in Vercel project settings)
-- `VERCEL_PROJECT_ID`: Your Vercel project ID (found in Vercel project settings)
+1. You need to add your Vercel API token as a secret in your GitHub repository:
+   - `VERCEL_TOKEN`: Your Vercel API token (can be created in Vercel account settings)
 
-You can use the included helper script to obtain the necessary Vercel configuration values:
+2. Make sure your project is linked to Vercel:
+   ```bash
+   # Link your project to Vercel (run this once in your project directory)
+   npx vercel
+   ```
 
+3. The GitHub Actions workflow will use the Vercel CLI to deploy your project.
+
+You can run the included helper script for additional guidance:
 ```bash
-# First, link your project to Vercel
-npx vercel link
-
-# Then run the helper script to get the configuration values
 npm run vercel-config
 ```
 
