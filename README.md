@@ -2,6 +2,8 @@
 
 A Next.js application for generating customized reports from Toggl time entries.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falexzelenuyk%2Ftoggle-report-vibe)
+
 ## Features
 
 - Form for inputting Toggl API credentials and parameters
@@ -10,13 +12,20 @@ A Next.js application for generating customized reports from Toggl time entries.
 - Downloadable CSV export
 - Material UI components for a clean, responsive UI
 
-## Getting Started
+## Deployment
 
-### Prerequisites
+### Deploy to Vercel
 
-- Node.js 18+ and npm
+The easiest way to deploy this application is to use the "Deploy with Vercel" button above.
 
-### Installation
+Alternatively, you can deploy it manually:
+
+1. Fork this repository
+2. Log in to [Vercel](https://vercel.com)
+3. Create a new project and import your forked repository
+4. Deploy!
+
+### Local Development
 
 1. Clone the repository:
    ```bash
