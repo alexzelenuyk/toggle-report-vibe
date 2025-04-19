@@ -132,27 +132,55 @@ export default function ReportTable({ data }: ReportTableProps) {
 
   return (
     <>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          flexDirection: { xs: 'column', sm: 'row' }, 
+          justifyContent: 'space-between', 
+          alignItems: { xs: 'flex-start', sm: 'center' }, 
+          mb: 2, 
+          gap: 2 
+        }}
+      >
         <Typography variant="h6">Report Results</Typography>
-        <Stack direction="row" spacing={2}>
-          <Button variant="outlined" onClick={copyToClipboard}>
-            Copy CSV to Clipboard
+        <Stack 
+          direction={{ xs: 'column', sm: 'row' }} 
+          spacing={1} 
+          sx={{ width: { xs: '100%', sm: 'auto' } }}
+        >
+          <Button 
+            variant="outlined" 
+            onClick={copyToClipboard}
+            fullWidth
+            size="small"
+            sx={{ minWidth: { xs: '100%', sm: 'auto' } }}
+          >
+            Copy CSV
           </Button>
-          <Button variant="outlined" onClick={downloadCsv}>
+          <Button 
+            variant="outlined" 
+            onClick={downloadCsv}
+            fullWidth
+            size="small"
+            sx={{ minWidth: { xs: '100%', sm: 'auto' } }}
+          >
             Download CSV
           </Button>
           <Button 
             variant="contained" 
             color="primary" 
             onClick={() => downloadExcel().catch(err => console.error('Excel export error:', err))}
+            fullWidth
+            size="small"
+            sx={{ minWidth: { xs: '100%', sm: 'auto' } }}
           >
             Export to Excel
           </Button>
         </Stack>
       </Box>
       
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
+      <TableContainer component={Paper} sx={{ overflow: 'auto' }}>
+        <Table sx={{ minWidth: { xs: 300, sm: 650 } }}>
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>

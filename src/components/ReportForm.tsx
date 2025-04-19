@@ -82,7 +82,7 @@ export default function ReportForm() {
           />
           
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Stack direction="row" spacing={2}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
               <DatePicker
                 label="Start Date"
                 value={startDate}
