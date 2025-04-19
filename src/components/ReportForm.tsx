@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { TextField, Button, Stack, Box, Alert, CircularProgress } from '@mui/material';
+import { TextField, Button, Stack, Box, Alert, CircularProgress, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -63,6 +63,13 @@ export default function ReportForm() {
 
   return (
     <>
+      <Box mb={3} p={2} sx={{ backgroundColor: '#f5f5f5', borderRadius: 1 }}>
+        <Typography variant="body2" color="text.secondary">
+          This tool generates reports from your Toggl time entries, calculating pause durations and total hours.
+          Your credentials are used only for API calls and never stored or logged.
+        </Typography>
+      </Box>
+      
       <form onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField
@@ -71,6 +78,7 @@ export default function ReportForm() {
             onChange={(e) => setWorkspaceId(e.target.value)}
             required
             fullWidth
+            helperText="Found in your Toggl workspace URL (e.g., 123456 from https://track.toggl.com/123456/)"
           />
           
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -97,7 +105,11 @@ export default function ReportForm() {
             onChange={(e) => setApiToken(e.target.value)}
             required
             fullWidth
-            helperText="Found in your Toggl profile settings"
+            helperText="Found in your Toggl Profile > Profile Settings > API Token (at the bottom)"
+            inputProps={{
+              autoComplete: 'off',
+              'data-sensitive': 'true',
+            }}
           />
           
           <TextField
@@ -105,6 +117,7 @@ export default function ReportForm() {
             value={jobId}
             onChange={(e) => setJobId(e.target.value)}
             fullWidth
+            helperText="Your project/client code (e.g., 123456-789). Will be displayed in the result table."
           />
           
           <Button 
